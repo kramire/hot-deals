@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Cart, List, Product } from "./pages";
-import { Banner } from "./components";
+import { Navbar } from "./components";
 
 const App = () => {
   return (
     <Router>
-      <Banner />
+      <Navbar />
       <Switch>
         <Route exact path="/cart">
           <Cart />
