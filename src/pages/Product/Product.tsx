@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Header, Segment } from "semantic-ui-react";
 import { Item } from "../../lib/types";
-import { ActionButton, ImageWrapper, TotalCost } from "../../components";
+import {
+  ActionButton,
+  ImageWrapper,
+  TotalCost,
+  Spinner,
+} from "../../components";
 import { capitalize, padPrice } from "../../lib/utils";
 import styled from "styled-components";
+import { useLoading } from "../../hooks/useLoading";
 
 const Wrapper = styled.div`
   margin: 4em 8em;
@@ -43,19 +49,24 @@ const DetailsWrapper = styled.div`
 export const Product = () => {
   const [product, setProduct] = useState<Item | null>(null);
   const { id } = useParams<{ id: string }>();
+  const { loading, setLoading } = useLoading();
 
   useEffect(() => {
     if (id) {
-      fetch(`https://fakestoreapi.com/products/${id}`)
+      setLoading(true);
+      fetch(`${process.env.REACT_APP_API_URL}/products/${id}`)
         .then(res => res.json())
-        .then(data => setProduct(data));
+        .then(data => setProduct(data))
+        .finally(() => setLoading(false));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (
     <>
-      {!product ? (
+      {loading ? (
+        <Spinner />
+      ) : !product ? (
         "No item found"
       ) : (
         <Wrapper>
