@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Item } from "../lib/types";
+import { Item } from "../../lib/types";
 import styled from "styled-components";
-import { ListItem } from "../components";
+import { ListItem } from "./ListItem";
 
 const Wrapper = styled.div`
   display: grid;

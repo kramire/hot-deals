@@ -1,6 +1,6 @@
 import React from "react";
-import { Item } from "../lib/types";
-import { padPrice } from "../lib/utils";
+import { Item } from "../../lib/types";
+import { padPrice } from "../../lib/utils";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
