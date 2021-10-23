@@ -2,6 +2,7 @@ import React from "react";
 import { Item } from "../../lib/types";
 import { padPrice } from "../../lib/utils";
 import { Link } from "react-router-dom";
+import { ImageWrapper } from "../../components";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const ItemWrapper = styled.div`
+const ListImage = styled(ImageWrapper)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -35,9 +36,9 @@ const ItemWrapper = styled.div`
 export const ListItem = (props: { item: Item }) => (
   <Link to={`/product/${props.item.id}`}>
     <Wrapper>
-      <ItemWrapper>
+      <ListImage>
         <img src={props.item.image} alt="item img" />
-      </ItemWrapper>
+      </ListImage>
       <div>
         <div>{props.item.title}</div>
         <div>${padPrice(props.item.price)}</div>
