@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Header, Segment } from "semantic-ui-react";
-import { Item } from "../../lib/types";
+import { CartType, Item } from "../../lib/types";
 import {
   ActionButton,
   ImageWrapper,
@@ -46,10 +46,26 @@ const DetailsWrapper = styled.div`
   }
 `;
 
-export const Product = () => {
+export const Product = (props: {
+  cart: CartType;
+  setCart: (value: CartType) => void;
+}) => {
+  const { cart, setCart } = props;
   const [product, setProduct] = useState<Item | null>(null);
   const { id } = useParams<{ id: string }>();
   const { loading, setLoading } = useLoading();
+
+  const addToCart = () => {
+    const currCount = cart?.[id]?.quantity ?? 0;
+    setCart({
+      ...cart,
+      [id]: {
+        ...cart?.[id],
+        quantity: currCount + 1,
+        unitPrice: Number(product?.price),
+      },
+    });
+  };
 
   useEffect(() => {
     if (id) {
@@ -78,6 +94,7 @@ export const Product = () => {
             <TotalCost>${padPrice(product.price)}</TotalCost>
             <Description>{capitalize(product.description)}</Description>
             <ActionButton
+              onClick={addToCart}
               content="Add to Cart"
               icon="cart"
               labelPosition="right"

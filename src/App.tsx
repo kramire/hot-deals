@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Cart, List, Product } from "./pages";
 import { Navbar } from "./components";
+import { CartType } from "./lib/types";
 import styled from "styled-components";
 
 const ContentWrapper = styled.div`
@@ -9,16 +11,17 @@ const ContentWrapper = styled.div`
 `;
 
 const App = () => {
+  const [cart, setCart] = useState<CartType>({});
   return (
     <Router>
-      <Navbar />
+      <Navbar cart={cart} />
       <ContentWrapper>
         <Switch>
           <Route exact path="/cart">
-            <Cart />
+            <Cart cart={cart} setCart={setCart} />
           </Route>
           <Route exact path="/product/:id">
-            <Product />
+            <Product cart={cart} setCart={setCart} />
           </Route>
           <Route exact path="/">
             <List />
