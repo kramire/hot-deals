@@ -12,3 +12,11 @@ export interface Item {
   rating: Rating;
   title: string;
 }
+
+// key is the itemId
+export type CartType = {
+  [key in string]: {
+    quantity: number;
+    unitPrice: number;
+  };
+};
