@@ -1,7 +1,7 @@
 import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 
-export const ActionButton = styled(Button)`
+export const StyledButton = styled(Button)`
   &&&& {
     width: 50%;
     border-radius: 0;
@@ -15,3 +15,20 @@ export const ActionButton = styled(Button)`
     }
   }
 `;
+
+export const ActionButton = (props: {
+  content: string;
+  handleClick: () => void;
+  icon?: string;
+  labelPosition?: string;
+  style?: Object;
+}) => (
+  <StyledButton
+    onClick={props.handleClick}
+    color="orange"
+    content={props.content}
+    icon={props.icon}
+    labelPosition={props.labelPosition}
+    style={props.style}
+  />
+);

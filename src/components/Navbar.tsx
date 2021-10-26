@@ -17,8 +17,10 @@ const Wrapper = styled.nav`
 `;
 
 const CartCount = styled(Label)`
-  right: 10px;
-  top: 10px;
+  &&&&& {
+    left: 99%;
+    top: 10px;
+  }
 `;
 
 const Logo = () => (

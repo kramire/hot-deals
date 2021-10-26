@@ -94,11 +94,10 @@ export const Product = (props: {
             <TotalCost>${padPrice(product.price)}</TotalCost>
             <Description>{capitalize(product.description)}</Description>
             <ActionButton
-              onClick={addToCart}
+              handleClick={addToCart}
               content="Add to Cart"
               icon="cart"
               labelPosition="right"
-              color="orange"
             />
           </DetailsWrapper>
         </Wrapper>
