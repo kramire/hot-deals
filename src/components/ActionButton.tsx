@@ -10,6 +10,12 @@ export const StyledButton = styled(Button)`
       opacity: 0.5;
     }
 
+    @media (hover: none) {
+      :hover {
+        opacity: inherit;
+      }
+    }
+
     @media screen and (max-width: 768px) {
       width: 100%;
     }

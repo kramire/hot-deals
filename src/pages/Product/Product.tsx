@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   @media screen and (max-width: 768px) {
+    margin: 4em;
     grid-template-columns: 1fr;
     grid-template-rows: calc((90vh - 4em) / 2) 1fr;
   }

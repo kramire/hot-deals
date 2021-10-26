@@ -21,7 +21,6 @@ const Wrapper = styled.div`
     margin: 4em;
     grid-template-areas: "cost" "items";
     grid-template-columns: 1fr;
-    grid-template-rows: calc((90vh - 4em) / 2) 1fr;
   }
 `;
 
