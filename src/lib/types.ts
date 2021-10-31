@@ -20,3 +20,5 @@ export type CartType = {
     unitPrice: number;
   };
 };
+
+export type SortDirection = "asc" | "desc";

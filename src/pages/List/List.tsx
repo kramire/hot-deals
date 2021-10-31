@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Item } from "../../lib/types";
+import { Item, SortDirection } from "../../lib/types";
 import { ListItem } from "./ListItem";
 import { useLoading } from "../../hooks/useLoading";
 import { Spinner } from "../../components";
+import { ListControls } from "./ListControls";
 import axios from "axios";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  margin: 1em 0;
+
   display: grid;
   grid-gap: 2em;
   grid-template-columns: repeat(3, minmax(100px, 300px));
@@ -22,15 +25,22 @@ const Wrapper = styled.div`
 
 export const List = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [filterCategory, setFilterCategory] = useState<string | undefined>();
+  const [sort, setSort] = useState<SortDirection>("asc");
   const { loading, setLoading } = useLoading();
   const LIST_LENGTH = 12;
 
   useEffect(() => {
+    let baseUrl = `${process.env.REACT_APP_API_URL}/products`;
+    if (filterCategory) {
+      baseUrl = baseUrl + `/category/${filterCategory}`;
+    }
+
     const loadList = async () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/products?limit=${LIST_LENGTH}`
+          `${baseUrl}?limit=${LIST_LENGTH}&sort=${sort}`
         );
         setItems(data);
       } catch (e) {
@@ -39,17 +49,32 @@ export const List = () => {
         setLoading(false);
       }
     };
+
     loadList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filterCategory, sort]);
 
-  return loading ? (
-    <Spinner />
-  ) : (
-    <Wrapper>
-      {items.map(item => (
-        <ListItem key={item.id} item={item} />
-      ))}
-    </Wrapper>
+  return (
+    <>
+      <Wrapper>
+        <ListControls
+          filterCategory={filterCategory}
+          setFilterCategory={setFilterCategory}
+          sort={sort}
+          setSort={setSort}
+        />
+      </Wrapper>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Wrapper>
+            {items.map(item => (
+              <ListItem key={item.id} item={item} />
+            ))}
+          </Wrapper>
+        </>
+      )}
+    </>
   );
 };
