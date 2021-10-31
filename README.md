@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Hot Deals
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Shop for hot products at low prices!
 
-## Available Scripts
+See a live demo [here](https://keen-shockley-f4d977.netlify.app/)
 
-In the project directory, you can run:
+### How-To
 
-### `npm start`
+- The home page shows a list of products.
+- Click a product to see the product details.
+- On the details page, click to add the item to the cart.
+- See the cart by clicking the cart icon in the top right corner.
+- See the current items in the cart, their quantites, and the total cost.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app is designed for all devices. Thus, make sure to view it on mobile as well!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisities
 
-### `npm test`
+There are no special prerequisites for this app. It uses a public API.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Begin by forking this repository, and cloning to your computer.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Prepare a `.env` file following the `.env.example` example.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install the necessary dependencies by running `npm i`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### To Start
 
-### `npm run eject`
+Run the command `npm run start`. This will build the React app, and open it in the browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tech Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React
+- Typescript
+- Fake Store API
+- Axios
+- Styled Components
+- Netlify (to Deploy)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Next Steps
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Logic / Code Quality
 
-## Learn More
+- This app is growing quickly! Consider using **React Context** for state management.
+- Decide how to **handle errors**. At the moment they are just logged to the console. Maybe a toaster.
+- **Add testing** to check: math of cart, adding / removing items from cart, site navigation.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+UI
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Add a **toaster for notifications**. Particularly when adding an item to the cart.
+- The API exposes a **categories filter**! That would be a good new feature.
+- Incorporate **quantities and stock**. The API exposes the number of available items as well.
