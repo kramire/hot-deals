@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Item } from "../../lib/types";
-import styled from "styled-components";
 import { ListItem } from "./ListItem";
 import { useLoading } from "../../hooks/useLoading";
 import { Spinner } from "../../components";
+import axios from "axios";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: grid;
@@ -22,13 +23,23 @@ const Wrapper = styled.div`
 export const List = () => {
   const [items, setItems] = useState<Item[]>([]);
   const { loading, setLoading } = useLoading();
+  const LIST_LENGTH = 12;
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`${process.env.REACT_APP_API_URL}/products?limit=12`)
-      .then(res => res.json())
-      .then(data => setItems(data))
-      .finally(() => setLoading(false));
+    const loadList = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/products?limit=${LIST_LENGTH}`
+        );
+        setItems(data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

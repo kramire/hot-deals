@@ -9,8 +9,9 @@ import {
   Spinner,
 } from "../../components";
 import { capitalize, padPrice } from "../../lib/utils";
-import styled from "styled-components";
 import { useLoading } from "../../hooks/useLoading";
+import axios from "axios";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   margin: 4em 8em;
@@ -69,12 +70,22 @@ export const Product = (props: {
   };
 
   useEffect(() => {
-    if (id) {
+    const getProduct = async () => {
       setLoading(true);
-      fetch(`${process.env.REACT_APP_API_URL}/products/${id}`)
-        .then(res => res.json())
-        .then(data => setProduct(data))
-        .finally(() => setLoading(false));
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API_URL}/products/${id}`
+        );
+        setProduct(data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      getProduct();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);

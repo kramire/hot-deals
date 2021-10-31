@@ -32,8 +32,15 @@ const TotalPrice = styled.div`
   font-weight: bold;
 `;
 
+const DeleteWrapper = styled.div`
+  font-style: italic;
+  font-size: 12px;
+`;
+
 const DeleteIcon = styled(Icon)`
   &&&&& {
+    margin-left: 1em;
+
     :hover {
       cursor: pointer;
     }
@@ -62,10 +69,13 @@ export const CartItem = (props: {
       </ImageWrapper>
       <MiddleWrapper>
         <div>{item.title}</div>
-        <DeleteIcon
-          name="trash alternate outline"
-          onClick={deleteItem(item.id)}
-        />
+        <DeleteWrapper>
+          Delete
+          <DeleteIcon
+            name="trash alternate outline"
+            onClick={deleteItem(item.id)}
+          />
+        </DeleteWrapper>
       </MiddleWrapper>
       <RightWrapper>
         <div>{quantity}</div>
