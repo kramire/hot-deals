@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Item, SortDirection } from "../../lib/types";
+import { Item, Role, SortDirection } from "../../lib/types";
 import { ListItem } from "./ListItem";
 import { useLoading } from "../../hooks/useLoading";
 import { Spinner } from "../../components";
 import { ListControls } from "./ListControls";
 import axios from "axios";
 import styled from "styled-components";
+import { ListItemAdmin } from "./ListItemAdmin";
 
-const Wrapper = styled.div`
-  margin: 1em 0;
+const BaseWrapper = styled.div`
+  margin: 1em;
+`;
 
+const Wrapper = styled(BaseWrapper)`
   display: grid;
   grid-gap: 2em;
   grid-template-columns: repeat(3, minmax(100px, 300px));
@@ -23,7 +26,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const List = () => {
+export const List = (props: { role: Role }) => {
   const [items, setItems] = useState<Item[]>([]);
   const [filterCategory, setFilterCategory] = useState<string | undefined>();
   const [sort, setSort] = useState<SortDirection>("asc");
@@ -66,14 +69,18 @@ export const List = () => {
       </Wrapper>
       {loading ? (
         <Spinner />
+      ) : props.role === "admin" ? (
+        <BaseWrapper>
+          {items.map(item => (
+            <ListItemAdmin key={item.id} item={item} />
+          ))}
+        </BaseWrapper>
       ) : (
-        <>
-          <Wrapper>
-            {items.map(item => (
-              <ListItem key={item.id} item={item} />
-            ))}
-          </Wrapper>
-        </>
+        <Wrapper>
+          {items.map(item => (
+            <ListItem key={item.id} item={item} />
+          ))}
+        </Wrapper>
       )}
     </>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Cart, List, Product } from "./pages";
 import { Navbar } from "./components";
-import { CartType } from "./lib/types";
+import { CartType, Role } from "./lib/types";
 import styled from "styled-components";
 
 const ContentWrapper = styled.div`
@@ -12,9 +12,11 @@ const ContentWrapper = styled.div`
 
 const App = () => {
   const [cart, setCart] = useState<CartType>({});
+  const [role, setRole] = useState<Role>("user");
+
   return (
     <Router>
-      <Navbar cart={cart} />
+      <Navbar cart={cart} role={role} setRole={setRole} />
       <ContentWrapper>
         <Switch>
           <Route exact path="/cart">
@@ -24,7 +26,7 @@ const App = () => {
             <Product cart={cart} setCart={setCart} />
           </Route>
           <Route exact path="/">
-            <List />
+            <List role={role} />
           </Route>
         </Switch>
       </ContentWrapper>

@@ -22,3 +22,5 @@ export type CartType = {
 };
 
 export type SortDirection = "asc" | "desc";
+
+export type Role = "user" | "admin";
