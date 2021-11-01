@@ -1,8 +1,11 @@
 import React from "react";
 import { ImageWrapper } from "./ImageWrapper";
+import { Role } from "../lib/types";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs((props: { $role?: Role }) => ({
+  $role: props.$role,
+}))<{ $role?: Role }>`
   padding: 2em;
 
   display: grid;
@@ -11,7 +14,8 @@ const Wrapper = styled.div`
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: ${props =>
+      props.$role === "admin" ? "1fr" : "1fr 1fr 1fr"};
 
     .title {
       max-width: 60px;
@@ -36,9 +40,10 @@ export const ItemLayout = (props: {
   imgSrc: string;
   middle: React.ReactNode;
   right: React.ReactNode;
+  role?: Role;
 }) => {
   return (
-    <Wrapper>
+    <Wrapper $role={props.role}>
       <ImageWrapper>
         <img src={props.imgSrc} alt="item img" />
       </ImageWrapper>

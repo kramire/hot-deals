@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Header, Segment } from "semantic-ui-react";
-import { CartType, Item } from "../../lib/types";
+import { CartType, Item, Role } from "../../lib/types";
 import {
   ActionButton,
   ImageWrapper,
@@ -51,6 +51,7 @@ const DetailsWrapper = styled.div`
 export const Product = (props: {
   cart: CartType;
   setCart: (value: CartType) => void;
+  role: Role;
 }) => {
   const { cart, setCart } = props;
   const [product, setProduct] = useState<Item | null>(null);
@@ -105,12 +106,14 @@ export const Product = (props: {
             <Header size="large">{product.title}</Header>
             <TotalCost>${padPrice(product.price)}</TotalCost>
             <Description>{capitalize(product.description)}</Description>
-            <ActionButton
-              handleClick={addToCart}
-              content="Add to Cart"
-              icon="cart"
-              labelPosition="right"
-            />
+            {props.role === "user" && (
+              <ActionButton
+                handleClick={addToCart}
+                content="Add to Cart"
+                icon="cart"
+                labelPosition="right"
+              />
+            )}
           </DetailsWrapper>
         </Wrapper>
       )}

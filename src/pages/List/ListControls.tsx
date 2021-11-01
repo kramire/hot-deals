@@ -1,7 +1,15 @@
 import React from "react";
-import { Dropdown, DropdownProps, Button, Icon } from "semantic-ui-react";
+import {
+  Dropdown,
+  DropdownProps,
+  Button,
+  Icon,
+  SemanticICONS,
+} from "semantic-ui-react";
 import { SortDirection } from "../../lib/types";
 
+// known from looking at the API documentation
+// there is an endpoint to get this information dynamically as well
 const categoryOptions = [
   { key: "electronics", value: "electronics", text: "Electronics" },
   { key: "jewelery", value: "jewelery", text: "Jewelery" },
@@ -12,6 +20,26 @@ const categoryOptions = [
     text: `Women's Clothing`,
   },
 ];
+
+const directionDict: { [key in SortDirection]: string } = {
+  asc: "ascending",
+  desc: "descending",
+};
+
+const SortButton = (props: {
+  sort: SortDirection;
+  handleClick(value: SortDirection): () => void;
+}) => (
+  <Button
+    icon
+    active={props.sort === "asc"}
+    onClick={props.handleClick(props.sort)}
+  >
+    <Icon
+      name={`sort alphabet ${directionDict[props.sort]}` as SemanticICONS}
+    />
+  </Button>
+);
 
 interface ListControlsProps {
   filterCategory: string | undefined;
@@ -45,20 +73,8 @@ export const ListControls = (props: ListControlsProps) => {
       <div>
         <div>Sort:</div>
         <Button.Group>
-          <Button
-            icon
-            active={props.sort === "asc"}
-            onClick={handleSortClick("asc")}
-          >
-            <Icon name="sort alphabet ascending" />
-          </Button>
-          <Button
-            icon
-            active={props.sort === "desc"}
-            onClick={handleSortClick("desc")}
-          >
-            <Icon name="sort alphabet descending" />
-          </Button>
+          <SortButton sort={"asc"} handleClick={handleSortClick} />
+          <SortButton sort={"desc"} handleClick={handleSortClick} />
         </Button.Group>
       </div>
     </>

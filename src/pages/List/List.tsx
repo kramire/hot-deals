@@ -8,11 +8,16 @@ import axios from "axios";
 import styled from "styled-components";
 import { ListItemAdmin } from "./ListItemAdmin";
 
-const BaseWrapper = styled.div`
-  margin: 1em;
+const AdminWrapper = styled.div`
+  margin: 2em 4em;
+
+  @media screen and (max-width: 600px) {
+    margin: 2em;
+  }
 `;
 
-const Wrapper = styled(BaseWrapper)`
+const Wrapper = styled.div`
+  margin: 1em;
   display: grid;
   grid-gap: 2em;
   grid-template-columns: repeat(3, minmax(100px, 300px));
@@ -70,11 +75,11 @@ export const List = (props: { role: Role }) => {
       {loading ? (
         <Spinner />
       ) : props.role === "admin" ? (
-        <BaseWrapper>
+        <AdminWrapper>
           {items.map(item => (
             <ListItemAdmin key={item.id} item={item} />
           ))}
-        </BaseWrapper>
+        </AdminWrapper>
       ) : (
         <Wrapper>
           {items.map(item => (

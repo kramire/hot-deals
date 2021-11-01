@@ -82,7 +82,7 @@ const ItemField = (props: {
       ) : (
         <>
           {props.isPrice && <span>$</span>}
-          <div className="title">{props.fieldValue}</div>
+          <div>{props.fieldValue}</div>
           <CustomIcon
             color="orange"
             name={"pencil"}
@@ -96,6 +96,7 @@ const ItemField = (props: {
 
 export const ListItemAdmin = (props: { item: Item }) => (
   <ItemLayout
+    role="admin"
     imgSrc={props.item.image}
     middle={
       <>

@@ -23,7 +23,7 @@ const App = () => {
             <Cart cart={cart} setCart={setCart} />
           </Route>
           <Route exact path="/product/:id">
-            <Product cart={cart} setCart={setCart} />
+            <Product cart={cart} setCart={setCart} role={role} />
           </Route>
           <Route exact path="/">
             <List role={role} />
